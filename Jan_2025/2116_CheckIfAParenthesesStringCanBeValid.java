@@ -30,3 +30,44 @@ class Solution {
         return stack.isEmpty();
     }
 }
+
+
+// optimized approach
+
+//https://www.youtube.com/watch?v=Xw8SkHIu2bI
+class Solution {
+    public boolean canBeValid(String s, String locked) {
+
+     if(s.length()%2!=0) return false;
+  
+
+        int open=0;   //travel left to right
+                      // increment open for '(' or '0'
+                      // decrement for ')'
+                      // return false if it become < 0
+
+        int close=0;   // travel right to left
+                      // increment close for ')' or '0' 
+                      // decrement for '('
+                      // return false if it become < 0              
+                  
+        for(int i=0;i<s.length();i++){
+
+           //left to right
+           if(s.charAt(i)=='(' || locked.charAt(i)=='0') open++;
+           else open--;
+
+           if(open<0) return false;
+
+           //right to left
+           if(s.charAt(s.length()-1-i)==')' || locked.charAt(s.length()-1-i)=='0') close++;
+           else close--;
+
+           if(close<0) return false;
+        }
+
+        return true;
+    }
+}
+
+
